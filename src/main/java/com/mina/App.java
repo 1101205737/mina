@@ -2,12 +2,11 @@ package com.mina;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 
 import org.apache.mina.core.service.IoAcceptor;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.prefixedstring.PrefixedStringCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+
+import com.util.SpringUtil;
 
 /**
  * Hello world!
@@ -22,5 +21,6 @@ public class App
     	acceptor.setHandler(new MinaHandler());
     	acceptor.bind(new InetSocketAddress(8888));
         System.out.println( "Hello World!" );
+        SpringUtil.initSpringContext();
     }
 }

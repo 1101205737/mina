@@ -30,21 +30,44 @@ class MyClient {
 		session = future.getSession();
 		Map params = new HashMap();
 		
-		params.put("_uid", SecurityHelper.encode32("1ad16116-1a69-49af-95e8-cc9bf8bb47cd".getBytes()));
-		String loginKey = SecurityHelper.EncoderByMd5("1ad16116-1a69-49af-95e8-cc9bf8bb47cd" + "g78$*h&j%jsJ454f-L+ls2~@4");
-		params.put("channel", "yh_ios_yy_002");
-		params.put("ua", loginKey);
-		params.put("isPay", "false");
-		params.put("isuseMoney", "true");
-		params.put("loginkey", loginKey);
+//		params.put("uid", "6180ae64-96e0-4e25-a116-42cd6d4a2d93");
+//		params.put("gidx", 16218);
+//		Map map = new HashMap();
+//		map.put("clazz", "HoleSvc");
+//		map.put("method", "getHoleInitInfo");
+//		map.put("params", params);
+//		map.put("uuid", 299);
+//		session.write(ByteUtil.objectToByte(map));
+		
+//		params.put("uid", "6180ae64-96e0-4e25-a116-42cd6d4a2d93");
+//		params.put("exchangeId", 1017);
+//		Map map = new HashMap();
+//		map.put("clazz", "HoleSvc");
+//		map.put("method", "exchange");
+//		map.put("params", params);
+//		map.put("uuid", 299);
+//		session.write(ByteUtil.objectToByte(map));
 		
 		
+//		params.put("uid", "6180ae64-96e0-4e25-a116-42cd6d4a2d93");
+//		params.put("gidx", 16218);
+//		Map map = new HashMap();
+//		map.put("clazz", "HoleSvc");
+//		map.put("method", "beginHole");
+//		map.put("params", params);
+//		map.put("uuid", 299);
+//		session.write(ByteUtil.objectToByte(map));
+		
+		
+//		params.put("uid", "6180ae64-96e0-4e25-a116-42cd6d4a2d93");
+//		params.put("exchangeId", 1017);
 		Map map = new HashMap();
-		map.put("clazz", "LoginSvc");
-		map.put("method", "login");
+		map.put("clazz", "HoleSvc");
+		map.put("method", "stop");
 		map.put("params", params);
 		map.put("uuid", 299);
 		session.write(ByteUtil.objectToByte(map));
-		//session.write("rr");
+		
+		
 	}
 }

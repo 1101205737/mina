@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:drools="http://drools.org/schema/drools-spring"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+     
+     
+
+
+     <context:annotation-config />  
+     <context:component-scan base-package="com.digisky.service.impl"/>
+     <context:component-scan base-package="com.digisky.log.impl"/>
+     <context:component-scan base-package="com.digisky.dao.impl"/>
+
+
+     
+     	<!-- 加载连接池配置文件 -->
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:c3p0.properties</value>
+		</property>
+	</bean>
+     
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		 <property name="driverClass"><value>com.mysql.jdbc.Driver</value> </property>
+		<property name="jdbcUrl"><value>jdbc:mysql://localhost:3306/game_dir?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</value></property>
+		<property name="properties">
+			<props>
+				<prop key="user">game_dir</prop>
+				<prop key="password">123456</prop>
+				<prop key="c3p0.min_size">5</prop>
+				<prop key="c3p0.max_size">20</prop>
+				<prop key="c3p0.timeout">300</prop>
+				<prop key="c3p0.acquire_increment">1</prop>
+				<prop key="c3p0.max_statements">0</prop>
+				<prop key="c3p0.idle_test_period">300</prop>
+			</props>
+		</property>
+		<property name="testConnectionOnCheckin"><value>true</value></property>
+		<property name="idleConnectionTestPeriod"><value>60</value></property>    
+	</bean>
+     
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.po" />
+		<property name="mapperLocations" value="classpath*:/mybatis/**/*Mapper.xml" />
+	    <property name="configurationProperties">
+	        <props>
+	            <prop key="dialect">mysql</prop>
+	        </props>
+	    </property>
+	</bean>
+     
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" 	value="com.dao" />
+		<property name="annotationClass" value="com.dao.core.MyBatisRepository"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean> 
+    
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    
+    <tx:annotation-driven/>
+
+</beans>
