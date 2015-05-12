@@ -1,5 +1,7 @@
 package com.game.bean;
 
+import java.util.List;
+
 /**
  * 英雄
  * @author dell
@@ -11,9 +13,7 @@ public class Hero {
 	
 	private double powerPlus;//部队生命加成
 
-	private int quick;//敏捷
-	
-	private double quickPlus;//部队速度加成
+	private int quick;//敏捷,指挥出兵的速度
 	
 	private int command;//智力
 	
@@ -28,6 +28,10 @@ public class Hero {
 	private int defense;
 	
 	private double defensePlus;//部队防御加成
+	
+	private List<Equip> equips;
+	
+	private List<Army> armys;
 
 	/**
 	 * @return the power
@@ -69,20 +73,6 @@ public class Hero {
 	 */
 	public void setQuick(int quick) {
 		this.quick = quick;
-	}
-
-	/**
-	 * @return the quickPlus
-	 */
-	public double getQuickPlus() {
-		return quickPlus;
-	}
-
-	/**
-	 * @param quickPlus the quickPlus to set
-	 */
-	public void setQuickPlus(double quickPlus) {
-		this.quickPlus = quickPlus;
 	}
 
 	/**
@@ -167,6 +157,20 @@ public class Hero {
 	 */
 	public void setDefensePlus(double defensePlus) {
 		this.defensePlus = defensePlus;
+	}
+
+	/**
+	 * @return the armys
+	 */
+	public List<Army> getArmys() {
+		return armys;
+	}
+
+	/**
+	 * @param armys the armys to set
+	 */
+	public void setArmys(List<Army> armys) {
+		this.armys = armys;
 	}
 	
 	
