@@ -15,7 +15,7 @@ public class ArmysConfig {
 			e.put("power", 100);//生命
 			e.put("attack", 100);//攻击
 			e.put("defense", 100);//防御
-			e.put("quick", 100);//速度
+			e.put("speed", 100);//速度
 			armys.put((Integer) e.get("id"), e);
 		}
 	}
