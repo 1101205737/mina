@@ -5,6 +5,14 @@ import java.util.List;
 import com.game.bean.Army;
 
 public class Faction {
+	
+	private int petId;//宠物
+	
+	private int heroId;//英雄
+	
+	private List<Army> armys;//部队
+	
+	//============================
 
 	private int speed;
 	
@@ -16,7 +24,7 @@ public class Faction {
 	
 	private double defensePlus;//部队防御加成
 	
-	private List<Army> armys;
+	
 
 	/**
 	 * @return the speed
