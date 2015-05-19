@@ -19,12 +19,14 @@ public class MinaHandler implements IoHandler{
 		
 	}
 
-	public void messageReceived(IoSession arg0, Object arg1) throws Exception {
+	public void messageReceived(IoSession session, Object arg1) throws Exception {
 		if(arg1 instanceof byte[]) {
 			Map para = (Map) ByteUtil.byteToObject((byte[]) arg1);
 			String class_ = (String) para.get("class");
 			String method_ = (String) para.get("method");
-			ProxyUtil.invoke(pix+class_, method_, null);
+			Map map = (Map) ProxyUtil.invoke(pix+class_, method_, null);
+			session.write(ByteUtil.objectToByte(map));
+			session.close();
 		}
 	}
 

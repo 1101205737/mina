@@ -128,7 +128,7 @@ public class Army {
 			return false;
 		int attack = atk-army.getDef();
 		army.setNum(army.getNum() - attack);
-		report.append("["+army.getPoint()+","+army.getPos()+","+attack+"]}");
+		report.append(army.getPoint()+","+army.getPos()+","+attack+"$");
 		return true;
 	}
 	

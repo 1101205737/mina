@@ -1,7 +1,7 @@
 package com.game.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,32 +22,31 @@ import com.game.bean.ArmysConfig;
  *
  */
 public class WarService {
-	
 
-	private boolean isFinished = false;//战斗是否结束
-
-	public StringBuffer war(Faction f1,Faction f2){
+	public static StringBuffer war(Faction f1,Faction f2){
 		SpeedListener listener = new SpeedListener();
 		listener.registe(f1,1);
 		listener.registe(f2,2);
 		StringBuffer report = new StringBuffer();
-		
+		boolean isFinished = false;//战斗是否结束
 		while(!isFinished){
 			StringBuffer report3 = new StringBuffer();
 			List<Army> list = listener.forward(report3);
 			if(list.size() > 0){
 				String[] temps = null;
+				String temp ="";
 				if(list.size() > 1){
-					String temp = report3.substring(report3.indexOf("]")+1);
-					temps = temp.split("]");
+					temp = report3.substring(report3.indexOf("/")+1);
+					temps = temp.split("/");
 				}else{
 					report.append(report3.toString());
+					temps = null;
 				}
-				
 				int i=0;
 				for(Army a : list){
-					if(temps != null)
-						report.append(temps[i++]+"]");
+					if(temps != null){
+						report.append(report3.substring(0, report3.indexOf("/")+1)+temps[i++]+"/");
+					}
 					if(a.getPoint() == 1){
 						if(!a.attack(f2,report))
 							isFinished = true;
@@ -62,7 +61,7 @@ public class WarService {
 	}
 	
 	
-	public static void main(String[] args){
+	public static Map test(){
 		
 		ArmysConfig.initConfig();
 		
@@ -178,7 +177,10 @@ public class WarService {
 		
 		WarService server = new WarService();
 		StringBuffer report = server.war(f1, f2);
-		System.out.println(report.toString());
+		Map ret = new HashMap();
+		ret.put("report", report.toString());
+		return ret;
+		//System.out.println(report.toString());
 	}
 	
 	/**

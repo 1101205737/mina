@@ -29,7 +29,7 @@ public class SpeedListener {
 		int minTime = getMinTime();
 		if(minTime == 0)
 			minTime = 1000;//秒
-		report.append("{["+minTime+"ms]");
+		report.append(minTime+"ms/");
 		int i=0;
 		times = new ArrayList<Integer>();
 		for(Army a : armys){
@@ -39,7 +39,7 @@ public class SpeedListener {
 			if(dstance >= maxDiff){
 				dstance = dstance%maxDiff;
 				ret.add(a);
-				report.append("["+a.getPoint()+","+a.getPos()+"]");
+				report.append(a.getPoint()+","+a.getPos()+"/");
 			}
 			a.setDistance(dstance);
 			time = (int) Math.ceil((maxDiff - dstance)*1000/(double)a.getSpeed());

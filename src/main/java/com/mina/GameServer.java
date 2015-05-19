@@ -13,7 +13,7 @@ import com.util.SpringUtil;
  * Hello world!
  *
  */
-public class App 
+public class GameServer 
 {
     public static void main( String[] args ) throws IOException
     {
