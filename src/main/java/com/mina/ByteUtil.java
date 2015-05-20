@@ -37,7 +37,6 @@ public class ByteUtil {
 		for(int i=0;i<b.length;i++){
 			b[i] = (byte) (temp & 0xff);
 			temp = temp>>8;
-			System.out.println(b[i]);
 		}
 		return b;
 	}

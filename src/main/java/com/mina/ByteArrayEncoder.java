@@ -9,7 +9,7 @@ public class ByteArrayEncoder extends ProtocolEncoderAdapter{
 
 	public void encode(IoSession session, Object message,
 			ProtocolEncoderOutput out) throws Exception {
-byte[] bytes = (byte[])message;
+		byte[] bytes = (byte[])message;
 		
 		IoBuffer buffer = IoBuffer.allocate(256);
 		buffer.setAutoExpand(true);
