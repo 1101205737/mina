@@ -45,7 +45,7 @@ public class WarService {
 				int i=0;
 				for(Army a : list){
 					if(temps != null){
-						report.append(report3.substring(0, report3.indexOf("/")+1)+temps[i++]+"/");
+						report.append("0/"+temps[i++]+"/");//相同时间内攻击延迟0ms
 					}
 					if(a.getPoint() == 1){
 						if(!a.attack(f2,report))

@@ -21,7 +21,7 @@ public class GameServer
     	acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter( new ByteArrayCodecFactory()));
     	acceptor.setHandler(new MinaHandler());
     	acceptor.bind(new InetSocketAddress(8888));
-        SpringUtil.initSpringContext();
+        //SpringUtil.initSpringContext();
         System.out.println( "Server is running..." );
     }
 }

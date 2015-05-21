@@ -1,13 +1,14 @@
 package com.mina;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.mina.core.buffer.IoBuffer;
+import net.sf.json.JSONObject;
+
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
-import com.util.EncodeUtil;
 import com.util.ProxyUtil;
 
 public class MinaHandler implements IoHandler{
@@ -20,6 +21,7 @@ public class MinaHandler implements IoHandler{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public void messageReceived(IoSession session, Object arg1) throws Exception {
 		System.out.println("param=="+new String((byte[])arg1));
 		//对象形式(java)
@@ -33,17 +35,19 @@ public class MinaHandler implements IoHandler{
 		}*/
 		//=========================================================================
 		//byte形式(c++)
-		String info = new String((byte[])arg1);
-		String[] infos = info.split("#");
-		String class_ = infos[0];
-		String method_ = infos[1];
-		Map<String,Object> map = (Map<String, Object>) ProxyUtil.invoke(pix+class_, method_, null);
-		String ret=(String) map.get("report");
-		int size = ret.getBytes("GBK").length;
+		String jsonStr = new String((byte[])arg1);
+		JSONObject json = JSONObject.fromObject(jsonStr);
+		Map<String,Object> map = null;
+		if(json.containsKey("param"))
+			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"), json.getString("param"));
+		else
+			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"));
+		json = JSONObject.fromObject(map);
+		int size = json.toString().getBytes("GBK").length;
 		byte[] pix = ByteUtil.intToByte(size);
 		byte[] msg = new byte[4+size];
 		System.arraycopy(pix, 0, msg, 0, 4);
-		System.arraycopy(ret.getBytes("GBK"), 0, msg, 4, size);
+		System.arraycopy(json.toString().getBytes("GBK"), 0, msg, 4, size);
 		session.write(msg);
 		session.close();
 	}
@@ -74,18 +78,13 @@ public class MinaHandler implements IoHandler{
 	}
 	
 	public static void main(String[] args){
-		byte[] pix = {1,3,5,6};
-		
-		byte[] ret = {55,88,99,5,7};
-		
-		byte[] msg = new byte[4+ret.length];
-		
-		System.arraycopy(pix, 0, msg, 0, 4);
-		System.arraycopy(ret, 0, msg, 4, ret.length);
-		
-//		for(byte x : msg){
-//			System.out.println(x);
-//		}
+		String str = "{'method_':'cc','class_':'abc'}";
+		JSONObject json = JSONObject.fromObject(str);
+		Map map = new HashMap();
+		for(Object key : json.keySet()){
+			map.put(String.valueOf(key), json.get(key));
+		}
+		System.out.println(map.toString());
 	}
 
 }

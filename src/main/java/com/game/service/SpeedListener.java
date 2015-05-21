@@ -29,7 +29,7 @@ public class SpeedListener {
 		int minTime = getMinTime();
 		if(minTime == 0)
 			minTime = 1000;//秒
-		report.append(minTime+"ms/");
+		report.append(minTime+"/");
 		int i=0;
 		times = new ArrayList<Integer>();
 		for(Army a : armys){
