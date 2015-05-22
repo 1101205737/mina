@@ -126,7 +126,7 @@ public class Army {
 		Army army = findAttackObject(f);
 		if(army == null)
 			return false;
-		int attack = atk-army.getDef();
+		int attack = atk-army.getDef();//伤害公式
 		army.setNum(army.getNum() - attack);
 		report.append(army.getPoint()+","+army.getPos()+","+attack+"#");
 		return true;

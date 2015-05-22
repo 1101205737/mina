@@ -42,12 +42,13 @@ public class MinaHandler implements IoHandler{
 			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"), json.getString("param"));
 		else
 			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"));
-		json = JSONObject.fromObject(map);
-		int size = json.toString().getBytes("GBK").length;
+		//json = JSONObject.fromObject(map);
+		String ret = (String) map.get("report");
+		int size = ret.getBytes("GBK").length;
 		byte[] pix = ByteUtil.intToByte(size);
 		byte[] msg = new byte[4+size];
 		System.arraycopy(pix, 0, msg, 0, 4);
-		System.arraycopy(json.toString().getBytes("GBK"), 0, msg, 4, size);
+		System.arraycopy(ret.getBytes("GBK"), 0, msg, 4, size);
 		session.write(msg);
 		session.close();
 	}
