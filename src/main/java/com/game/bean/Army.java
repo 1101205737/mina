@@ -134,7 +134,7 @@ public class Army {
 	
 	public Army findAttackObject(Faction f){
 		Army army = f.getArmys().get(pos-1);
-		if(army.getNum() > 0 && pos < 3)
+		if(army.getNum() > 0 && pos < 4)
 			return army;
 		else{
 			for(int i=0;i<f.getArmys().size();i++){

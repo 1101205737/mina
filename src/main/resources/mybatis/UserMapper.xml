@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//
+EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.game.dao.UserDAO">
+
+<sql id="all_column">
+	m.ID as id, 
+	m.ICON as iconCls, 
+	m.NAME as text, 
+	m.STATUS as status, 
+	m.URL as url, 
+	m.PARENT_ID as parentId, 
+	m.state as state, 
+	m.isLeaf as isLeaf, 
+	m.sort as sort
+</sql>
+<!-- 查询所有，针对列表展现 -->
+<select id="queryAll" resultType="User">
+	select <include refid="all_column"/> from t_sys_menu m
+</select>
+ <!-- 查询已授权给角色的功能，授权界面初始化展现 -->
+<select id="queryAnth" resultType="SysMenu" parameterType="java.lang.Integer">
+	select <include refid="all_column"/> from t_sys_menu m,r_role_menu r where m.ID=r.MENU_ID and r.ROLE_ID=#{roleId}
+</select>
+ <!-- 根据用户查询授权的功能，首页功能菜单展现 -->
+<select id="queryByUser" resultType="SysMenu" parameterType="String">
+ 	select <include refid="all_column"/> from t_sys_menu m,r_role_menu rm,t_sys_role r,r_user_role ur,t_sys_user u where m.ID=rm.menu_id
+ and rm.role_id=r.ID and r.ID=ur.role_id and ur.user_id=u.id and m.isLeaf=0 and u.user_name=#{username}
+ </select>
+ 
+ <select id="getByParentId" resultType="SysMenu" parameterType="java.lang.Integer">
+ 	select <include refid="all_column"/> from t_sys_menu m where m.parent_id=#{parentId}
+ </select>
+ 
+ <select id="queryNotLeaf" resultType="SysMenu">
+ 	select <include refid="all_column"/> from t_sys_menu m where m.isLeaf=0
+ </select>
+ 
+ <select id="getByMenuId" resultType="RRoleMenu" parameterType="java.lang.Integer">
+ 	select id,role_id as roleId,menu_id as menuId from r_role_menu where menu_id=#{menuId}
+ </select>
+ 
+ <insert id="create" parameterType="SysMenu">
+ 	insert into t_sys_menu(ICON, 
+	NAME, 
+	STATUS, 
+	URL, 
+	PARENT_ID, 
+	state, 
+	isLeaf, 
+	sort) values(
+		#{iconCls},
+		#{text},
+		#{status},
+		#{url},
+		#{parentId},
+		#{state},
+		#{isLeaf},
+		#{sort})
+ </insert>
+ 
+ <select id="findById" resultType="SysMenu" parameterType="java.lang.Integer">
+ 	select <include refid="all_column"/> from t_sys_menu m where m.id=#{id}
+ </select>
+ 
+ <update id="updateMenu" parameterType="SysMenu">
+ 	update t_sys_menu
+ 	<set>
+ 		icon=#{iconCls},
+ 		name=#{text},
+ 		status=#{status},
+ 		url=#{url},
+ 		sort=#{sort}
+ 	</set>
+ 	where id=#{id}
+ </update>
+ 
+ <delete id="deleteMenu" parameterType="java.lang.Integer">
+ 	delete from t_sys_menu where id=#{id,jdbcType=INTEGER}
+ </delete>
+ 
+ <delete id="clearMenuR" parameterType="java.lang.Integer">
+ 	delete from r_role_menu where menu_id=#{menuId,jdbcType=INTEGER}
+ </delete>
+ 
+ <select id="getMaxSort" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+ 	select max(sort) from t_sys_menu where parent_id=#{parentId}
+ </select>
+</mapper>
