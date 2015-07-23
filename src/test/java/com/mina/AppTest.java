@@ -35,4 +35,9 @@ public class AppTest
     {
         assertTrue( true );
     }
+    
+    public static void main(String[] args){
+    	float detal = 0.01656616f;
+    	System.out.println(detal/0.008283081f);
+    }
 }

@@ -48,6 +48,7 @@ public class MinaHandler implements IoHandler{
 		byte[] pix = ByteUtil.intToByte(size);
 		byte[] msg = new byte[4+size];
 		System.arraycopy(pix, 0, msg, 0, 4);
+		System.out.println(ret);
 		System.arraycopy(ret.getBytes("GBK"), 0, msg, 4, size);
 		session.write(msg);
 		session.close();
