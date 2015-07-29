@@ -20,9 +20,8 @@
 
 
      <context:annotation-config />  
-     <context:component-scan base-package="com.digisky.service.impl"/>
-     <context:component-scan base-package="com.digisky.log.impl"/>
-     <context:component-scan base-package="com.digisky.dao.impl"/>
+     <context:component-scan base-package="com.game.service"/>
+     <context:component-scan base-package="com.game.dao"/>
 
 
      
@@ -35,11 +34,11 @@
      
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		 <property name="driverClass"><value>com.mysql.jdbc.Driver</value> </property>
-		<property name="jdbcUrl"><value>jdbc:mysql://localhost:3306/game_dir?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</value></property>
+		<property name="jdbcUrl"><value>jdbc:mysql://localhost:3306/game_test?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</value></property>
 		<property name="properties">
 			<props>
-				<prop key="user">game_dir</prop>
-				<prop key="password">123456</prop>
+				<prop key="user">game_test</prop>
+				<prop key="password">game_test</prop>
 				<prop key="c3p0.min_size">5</prop>
 				<prop key="c3p0.max_size">20</prop>
 				<prop key="c3p0.timeout">300</prop>

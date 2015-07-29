@@ -39,17 +39,17 @@ public class MinaHandler implements IoHandler{
 		JSONObject json = JSONObject.fromObject(jsonStr);
 		Map<String,Object> map = null;
 		if(json.containsKey("param"))
-			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"), json.getString("param"));
+			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"), json.get("param"));
 		else
 			map = (Map<String, Object>) ProxyUtil.invoke(pix+json.getString("class_"), json.getString("method_"));
-		//json = JSONObject.fromObject(map);
-		String ret = (String) map.get("report");
-		int size = ret.getBytes("GBK").length;
+		json = JSONObject.fromObject(map);
+		//String ret = (String) map.get("report");
+		int size = json.toString().getBytes("GBK").length;
 		byte[] pix = ByteUtil.intToByte(size);
 		byte[] msg = new byte[4+size];
 		System.arraycopy(pix, 0, msg, 0, 4);
-		System.out.println(ret);
-		System.arraycopy(ret.getBytes("GBK"), 0, msg, 4, size);
+		System.out.println(json.toString());
+		System.arraycopy(json.toString().getBytes("GBK"), 0, msg, 4, size);
 		session.write(msg);
 		session.close();
 	}

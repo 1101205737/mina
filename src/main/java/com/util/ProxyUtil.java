@@ -316,7 +316,11 @@ public class ProxyUtil {
 			for(int i=0;i<args.length;i++){
 				types[i] = args[i].getClass();
 			}
-			method = clazz.getMethod(method_, types);
+			try{
+				method = clazz.getMethod(method_, types);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			ret = method.invoke(null,args);
 		}else{
 			method = clazz.getMethod(method_);

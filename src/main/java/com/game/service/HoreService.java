@@ -3,15 +3,29 @@ package com.game.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.game.bean.Equip;
-import com.game.bean.Hore;
 import com.game.conf.EquipsConfig;
+import com.game.dao.HoreDAO;
+import com.game.dto.Hore;
 import com.util.ProxyUtil;
 
+@Service
 public class HoreService {
+	
+	@Autowired
+	private HoreDAO horeDAO;
 	
 	public Hore getById(int id){
 		return null;
+	}
+	
+	
+	public void getHoreByUser(int userId){
+		List<com.game.bean.Hore> list = horeDAO.queryAll();
+		System.out.println(list.size());
 	}
 
 	public void modifyEquip(int userHoreId,int pos,int equipId){
