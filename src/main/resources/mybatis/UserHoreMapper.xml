@@ -25,7 +25,7 @@ EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 	m.EQUIP_ATTACK as equipAttack
 </sql>
 <!-- 查询所有，针对列表展现 -->
-<select id="queryAll" resultType="Hore">
+<select id="queryAll" resultType="UserHore">
 	select <include refid="all_column"/> from HORE m
 </select>
 </mapper>
