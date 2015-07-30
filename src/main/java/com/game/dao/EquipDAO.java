@@ -3,11 +3,9 @@ package com.game.dao;
 import java.util.List;
 
 import com.dao.core.MyBatisRepository;
-import com.game.bean.UserHore;
-
+import com.game.bean.UserEquip;
 
 @MyBatisRepository
-public interface HoreDAO {
-
-	public List<UserHore> queryAll();
+public interface EquipDAO {
+	public List<UserEquip> queryAll();
 }

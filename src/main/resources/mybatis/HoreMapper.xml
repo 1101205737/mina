@@ -6,8 +6,23 @@ EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <sql id="all_column">
 	m.ID as id, 
-	m.HORE_ID as horeId, 
-	m.LVL as lvl
+	m.CONF_ID as confId, 
+	m.LVL as lvl,
+	m.USER_ID as userId,
+	m.BASE_POWER as basePower,
+	m.BASE_SPEED as baseSpeed,
+	m.BASE_IQ as baseIq,
+	m.BASE_ATTACK as baseAttack,
+	m.EQUIP_1 as equip_1,
+	m.EQUIP_2 as equip_2,
+	m.EQUIP_3 as equip_3,
+	m.EQUIP_4 as equip_4,
+	m.EQUIP_5 as equip_5,
+	m.EQUIP_6 as equip_6,
+	m.EQUIP_POWER as equipPower,
+	m.EQUIP_SPEED as equipSpeed,
+	m.EQUIP_IQ as equipIq,
+	m.EQUIP_ATTACK as equipAttack
 </sql>
 <!-- 查询所有，针对列表展现 -->
 <select id="queryAll" resultType="Hore">

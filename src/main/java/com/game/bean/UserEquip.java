@@ -1,6 +1,6 @@
 package com.game.bean;
 
-public class Equip {
+public class UserEquip {
 
 	private int attack;
 	
