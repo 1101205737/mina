@@ -7,6 +7,7 @@ import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
+import com.game.conf.Config;
 import com.game.init.GameInit;
 import com.util.SpringUtil;
 
@@ -23,6 +24,7 @@ public class GameServer
     	acceptor.setHandler(new MinaHandler());
     	acceptor.bind(new InetSocketAddress(8888));
         SpringUtil.initSpringContext();
+        Config.init();
         GameInit.init();
         System.out.println( "Server is running..." );
     }

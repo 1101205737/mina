@@ -2,118 +2,72 @@ package com.game.bean;
 
 public class UserEquip {
 
-	private int attack;
-	
-	private int power;
-	
-	private int speed;
-	
-	private int iq;
-	
-	private int skillId;
-	
-	private int powerRecover;
-	
-	private int iqRecover;
-
+	private int id;
+	private int confId;
+	private int userId;
+	private int used;
+	private int horeId;
 	/**
-	 * @return the attack
+	 * @return the id
 	 */
-	public int getAttack() {
-		return attack;
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	/**
+	 * @return the confId
+	 */
+	public int getConfId() {
+		return confId;
+	}
+	/**
+	 * @param confId the confId to set
+	 */
+	public void setConfId(int confId) {
+		this.confId = confId;
+	}
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	/**
-	 * @param attack the attack to set
+	 * @return the used
 	 */
-	public void setAttack(int attack) {
-		this.attack = attack;
+	public int getUsed() {
+		return used;
 	}
-
 	/**
-	 * @return the power
+	 * @param used the used to set
 	 */
-	public int getPower() {
-		return power;
+	public void setUsed(int used) {
+		this.used = used;
 	}
-
 	/**
-	 * @param power the power to set
+	 * @return the horeId
 	 */
-	public void setPower(int power) {
-		this.power = power;
+	public int getHoreId() {
+		return horeId;
 	}
-
 	/**
-	 * @return the speed
+	 * @param horeId the horeId to set
 	 */
-	public int getSpeed() {
-		return speed;
+	public void setHoreId(int horeId) {
+		this.horeId = horeId;
 	}
-
-	/**
-	 * @param speed the speed to set
-	 */
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-
-	/**
-	 * @return the iq
-	 */
-	public int getIq() {
-		return iq;
-	}
-
-	/**
-	 * @param iq the iq to set
-	 */
-	public void setIq(int iq) {
-		this.iq = iq;
-	}
-
-	/**
-	 * @return the skillId
-	 */
-	public int getSkillId() {
-		return skillId;
-	}
-
-	/**
-	 * @param skillId the skillId to set
-	 */
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
-	}
-
-	/**
-	 * @return the powerRecover
-	 */
-	public int getPowerRecover() {
-		return powerRecover;
-	}
-
-	/**
-	 * @param powerRecover the powerRecover to set
-	 */
-	public void setPowerRecover(int powerRecover) {
-		this.powerRecover = powerRecover;
-	}
-
-	/**
-	 * @return the iqRecover
-	 */
-	public int getIqRecover() {
-		return iqRecover;
-	}
-
-	/**
-	 * @param iqRecover the iqRecover to set
-	 */
-	public void setIqRecover(int iqRecover) {
-		this.iqRecover = iqRecover;
-	}
-	
 	
 	
 }

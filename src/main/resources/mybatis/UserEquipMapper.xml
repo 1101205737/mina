@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//
+EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.game.dao.EquipDAO">
+
+<sql id="all_column">
+	m.ID as id, 
+	m.CONF_ID as confId, 
+	m.USER_ID as userId,
+	m.USED as used,
+	m.HORE_ID as horeId
+
+</sql>
+<!-- 查询所有，针对列表展现 -->
+<select id="queryAll" resultType="UserEquip">
+	select <include refid="all_column"/> from equip m
+</select>
+</mapper>

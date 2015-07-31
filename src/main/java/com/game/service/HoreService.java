@@ -44,11 +44,11 @@ public class HoreService {
 				}
 			}
 		}
-		System.out.println("hore init over ....");
+		System.out.println("user hore init over ....");
 	}
 	
-	public Hore getById(int id){
-		return null;
+	public UserHore getById(int id){
+		return ID_OBJ.get(id);
 	}
 	
 	
@@ -66,9 +66,9 @@ public class HoreService {
 
 	public void modifyEquip(int userHoreId,int pos,int equipId){
 		try {
-			Hore hore = getById(userHoreId);
+			UserHore hore = getById(userHoreId);
 			ProxyUtil.setter(hore, "equip_"+pos, equipId, Integer.TYPE);
-			countEquipAttr(hore);
+			//countEquipAttr(hore);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
